@@ -6,7 +6,7 @@ export interface PlayerProps {
      */
     view?: 'list';
     /**
-     * The theme color of the embed. Black/White.
+     * The theme color of the embed. Only Black for now.
      */
     theme?: 'black';
     /**
