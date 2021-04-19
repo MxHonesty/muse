@@ -9,9 +9,16 @@ export default {
 
 const Template: Story<PlayerProps> = (args) => <Player {...args} />;
 
-export const ListBlackTheme = Template.bind({});
-ListBlackTheme.args = {
+export const Album = Template.bind({});
+Album.args = {
   view: 'list',
   theme: 'black',
   uri: 'spotify:album:1TIUsv8qmYLpBEhvmBmyBk',
+};
+
+export const Track = Template.bind({});
+Track.args = {
+  view: 'list',
+  theme: 'black',
+  uri: 'spotify:track:1nJE8TEWK9hf9Bl0pekJCi',
 };
