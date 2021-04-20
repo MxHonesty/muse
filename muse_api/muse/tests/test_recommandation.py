@@ -1,5 +1,5 @@
 from django.test import TestCase
-from .models import Recommandation
+from ..models import Recommandation
 
 class RecommandationTestCase(TestCase):
 
@@ -8,7 +8,7 @@ class RecommandationTestCase(TestCase):
         Recommandation.objects.create(description='test description')
         Recommandation.objects.create(trackId="123123123")
 
-    def test_title_contnet(self):
+    def test_title_content(self):
         recomands = Recommandation.objects.get(id=1)
         expected_object_name = f'{recomands.title}'
         self.assertEqual(expected_object_name, 'test rec')
