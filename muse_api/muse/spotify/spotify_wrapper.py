@@ -6,6 +6,7 @@ functionalities.
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 from .track import Track
+from .custom_cache_handler import MemoryCacheHandler
 
 
 class SpotifyApi:
@@ -18,15 +19,16 @@ class SpotifyApi:
         # Spotify wrapper object.
         self.__sp = spotipy.Spotify(auth_manager=SpotifyClientCredentials(
             client_id="4453d7ed53d748069267703e16a41e5c",
-            client_secret="5c8ff7ac11924faba56b38a9f5e09dbd"
-        ))
+            client_secret="5c8ff7ac11924faba56b38a9f5e09dbd",
+            cache_handler=MemoryCacheHandler()
+        ), )
 
     def get_first_tracks(self, search: str, number: int) -> list:
         """
         Get the first number tracks for the given search.
-        Parameters:
-            search - the text query, usually the title of the song
-            number - the maximum number of items to display
+        Args:
+            search: the text query, usually the title of the song
+            number: the maximum number of items to display
         Returns:
             A list of Track instances.
         """
