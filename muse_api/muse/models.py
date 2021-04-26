@@ -15,8 +15,8 @@ class Recommandation(models.Model):
     
     title = models.CharField(max_length=50)
     description = models.TextField(max_length=300)
-    # Id of the recommanded track
-    trackId = models.CharField(max_length=150)
+    trackId = models.CharField(max_length=150)  # Id of the recommanded track
+    updated = models.DateTimeField(auto_now=True, blank=True)  # Date updated
 
     def __str__(self):
         """ String representation of the Recommandation model. """
