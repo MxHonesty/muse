@@ -1,23 +1,16 @@
 import React from 'react';
 
 export interface PlayerProps {
-    /**
-     * The type of view the of the embed. 
-     */
+    /** The type of view the of the embed. */
     view?: 'list';
-    /**
-     * The theme color of the embed. Only Black for now.
-     */
+    /** The theme color of the embed. Only Black for now. */
     theme?: 'black';
-    /**
-     * The URI for the content.
-     */
+    /** The URI for the content. */
     uri: string;  // TODO: Validare de format pe URI.
 }
 
-/**
- * Web player for given uri.
- * Scales to fit container size.
+/** Web player for given uri.
+ *  Scales to fit container size.
  */
 export const Player = ({
     view = 'list',
