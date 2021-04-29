@@ -58,7 +58,7 @@ export class SearchBar extends Component<SearchBarProps, SearchBarState> {
         return(
             <div>
                 <input type='text' onChange={this.onTextChange} />
-                <pre> {this.state.data} </pre>
+                <p> {this.state.data} </p>
             </div>
         );
     }
