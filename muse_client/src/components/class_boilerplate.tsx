@@ -37,6 +37,6 @@ export class TestClass extends Component<TestProps, TestState> {
                 <h3> This is an example </h3>
             </div>
         );
-    }; 
+    } 
 
 }

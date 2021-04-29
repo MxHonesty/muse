@@ -3,7 +3,7 @@ import { Story, Meta } from '@storybook/react';
 import {
     TrackDisplay,
     TrackDisplayProps
-} from '../../components/track_display';
+} from '../../components/search/track_display';
 
 export default {
     title: 'Track Display',
