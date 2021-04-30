@@ -9,8 +9,8 @@ export interface SearchBarState {
     /** Current text in search bar */
     text: string,
 
-    /** Data for tracks */
-    data: string,
+    /** An array of objects representing the current data. */
+    data: Array<Object>,
 
     /** Timeout for typing. */
     typingTimeout: any,
@@ -26,7 +26,7 @@ export class SearchBar extends Component<SearchBarProps, SearchBarState> {
         super(props);
         this.state = {
             text: "",
-            data: "",
+            data: [],
             typingTimeout: 0
         };
 
@@ -46,19 +46,20 @@ export class SearchBar extends Component<SearchBarProps, SearchBarState> {
         self.setState({
             text: event.target.value,
             typingTimeout: setTimeout(async () => {
-                let res_data = await self.props.call(self.state.text);
-                self.setState({data: res_data});
-            }, 2000),
+                if(self.state.text !== "") {  // If a text is entered.
+                    let res_data = await self.props.call(self.state.text);
+                    self.setState({data: JSON.parse(res_data)});
+                    console.log(self.state.data);  // DEBUG LOG
+                }
+
+            }, 1000),
         });
-        
-        
     }
 
     render() {
         return(
             <div>
                 <input type='text' onChange={this.onTextChange} />
-                <p> {this.state.data} </p>
             </div>
         );
     }
