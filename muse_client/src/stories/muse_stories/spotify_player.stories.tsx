@@ -1,6 +1,6 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react';
-import { Player, PlayerProps } from '../../components/spotify_player';
+import { Player, PlayerProps } from '../../components/Player';
 
 export default {
   title: 'Spotify Player',

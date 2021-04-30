@@ -3,7 +3,7 @@ import { Story, Meta } from '@storybook/react';
 import { 
     GenericPlayer, 
     GenericPlayerProps 
-} from '../../components/generic_player'
+} from '../../components/GenericPlayer'
 
 export default {
     title: 'Generic Spotify Player',

@@ -2,7 +2,7 @@ import React, { ComponentProps } from 'react';
 
 import { Story } from '@storybook/react';
 
-import { MuseText } from '../../components/muse_text';
+import { MuseText } from '../../components/MuseText';
 
 // TODO: https://storybook.js.org/docs/react/get-started/setup
 

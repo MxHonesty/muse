@@ -1,4 +1,4 @@
-import { TrackDisplay } from './track_display';
+import { TrackDisplay } from './TrackDisplay';
 
 /** Interface for a Track */
 export interface Track extends Object {

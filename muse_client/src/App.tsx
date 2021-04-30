@@ -2,12 +2,12 @@ import logo from './logo.svg';
 import './App.css';
 
 import { TestClass } from './components/class_boilerplate';
-import { Player } from './components/spotify_player';
+import { Player } from './components/Player';
 import { BrowserRouter as Router,
   Switch,
   Route,
  } from 'react-router-dom';
-import { SearchBar } from './components/search/search_bar';
+import { SearchBar } from './components/search/SearchBar';
 import { TrackListView } from './components/search/TrackListView';
 
 
@@ -33,7 +33,7 @@ function App() {
                 }}>
                  {(data: Array<any>) => { return <TrackListView data={data}/> }} 
                 </SearchBar>
-                
+
             </Route>
             <Route path="/">
               <img src={logo} className="App-logo" alt="logo" />
