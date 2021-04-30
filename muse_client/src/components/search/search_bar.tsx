@@ -1,8 +1,17 @@
 import { Component, ChangeEvent } from 'react';
 
 export interface SearchBarProps {
-    /** Function for obtaining the data */
+    /** Function for obtaining the data.
+     *  
+     * **Return:** a string representing the
+     * response body that can be parsed into json.
+     */
     call: (name:string) => Promise<string>;
+
+    /** Function that takes an array of data objects. 
+     * Mainly used to display a list view.
+     */
+    children?: (data: Array<Object>) => JSX.Element;
 }
 
 export interface SearchBarState {
@@ -10,7 +19,7 @@ export interface SearchBarState {
     text: string,
 
     /** An array of objects representing the current data. */
-    data: Array<Object>,
+    data: Array<any>,
 
     /** Timeout for typing. */
     typingTimeout: any,
@@ -20,6 +29,32 @@ export interface SearchBarState {
  * Search bar Component for handling call and data logic.
  * Uses the callback call every few seconds after user stopped
  * typing in order to collect and display the data.
+ * 
+ * **Children**:
+ *      Can have a function child that takes an array of any type objects and
+ *      returns a component. This can be used in order to display the current
+ *      data with the help of a list view.
+ * 
+ * **Example**: 
+ *      In this example we can see a function passed as calls props 
+ *      that takes a name and returns a text representing the body
+ *      of the response.
+ *      As a child, a *display* function is passed that takes as
+ *      an argument the data, an array of any type and returns a 
+ *      component.
+ *      If no children ar provided, then nothing will be displayed.
+ *   ```   <SearchBar
+ *          call={async (name)=>{
+ *          let res = await fetch(`http://127.0.0.1:8000/api/song/?track_name=${name}&nr=5`)
+ *          let text = await res.text();
+ *          return text;
+ *          }}>
+ *              {(data: Array<any>) => { return <TrackListView data={data}/> }} 
+ *          </SearchBar> 
+ * 
+ *   ```
+ * 
+
  */
 export class SearchBar extends Component<SearchBarProps, SearchBarState> {
     constructor(props: SearchBarProps) {
@@ -60,6 +95,7 @@ export class SearchBar extends Component<SearchBarProps, SearchBarState> {
         return(
             <div>
                 <input type='text' onChange={this.onTextChange} />
+                {this.props.children ? this.props.children(this.state.data) : null}
             </div>
         );
     }

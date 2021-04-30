@@ -2,8 +2,7 @@
  * Module implements the details view of a single track.
  */
 
-import React from 'react';
-
+/** The props for the TrackDisplay. */
 export interface TrackDisplayProps {
     /** Name of the song. */
     name: string;
@@ -22,7 +21,7 @@ export interface TrackDisplayProps {
 export const TrackDisplay = ({name, artist, image_url}: TrackDisplayProps) => {
     return (
         <div>
-            <img src={image_url} />
+            <img src={image_url} alt={name} />
             <span><h3>{name}</h3> by <h2>{artist}</h2></span>
         </div>
     )
