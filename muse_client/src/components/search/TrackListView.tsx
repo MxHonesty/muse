@@ -17,12 +17,12 @@ export interface TrackListProps {
     data?: Array<Track>,
 
     /** Event called when an item is selected */
-    onSelect: (track_id: string) => void,
+    onSelect?: (track_id: string) => void,
 }
 
 export const TrackListView = ({
     data = [],  // By default empty.
-    onSelect,
+    onSelect = (track_id: string) => {},
 }: TrackListProps) => {
 
     /** Function for handling the Click of a list item. */
