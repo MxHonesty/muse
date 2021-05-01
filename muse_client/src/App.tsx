@@ -31,7 +31,7 @@ function App() {
                 let text = await res.text();
                 return text;
                 }}>
-                 {(data: Array<any>) => { return <TrackListView data={data}/> }} 
+                 {(data: Array<any>) => { return <TrackListView data={data} onSelect={(trackId) => {console.log(trackId);}}/> }} 
                 </SearchBar>
 
             </Route>
