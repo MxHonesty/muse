@@ -1,4 +1,5 @@
-import { TrackDisplay } from './TrackDisplay';
+import { TrackDisplay, TrackDisplayProps } from './TrackDisplay';
+import { withTrackId, WithTrackIdProps } from './withTrackId';
 import React from 'react';
 
 /** Interface for a Track */
@@ -25,16 +26,19 @@ export const TrackListView = ({
 }: TrackListProps) => {
 
     /** Function for handling the Click of a list item. */
-    function handleClick(e: React.MouseEvent<HTMLLIElement>) {
-        onSelect(e.currentTarget.accessKey);
+    function handleClick(id: string) {
+        onSelect(id);
     }
+
+    const TrackDisplayWithId = withTrackId<TrackDisplayProps & WithTrackIdProps>(TrackDisplay);
 
     return (
         <ul>
             {data.map(track => 
-            <li key={track.track_id} style={{listStyleType: 'none'}} onClick={handleClick}>
-                <TrackDisplay name={track.name}
-                artist={track.artist} image_url={track.image_url}/> 
+            <li key={track.track_id} style={{listStyleType: 'none'}}>
+                <TrackDisplayWithId name={track.name}
+                artist={track.artist} image_url={track.image_url} track_id={track.track_id}
+                getId={handleClick}/> 
             </li>)}
         </ul>
     );

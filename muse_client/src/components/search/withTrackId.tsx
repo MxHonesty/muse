@@ -1,14 +1,14 @@
 import React from 'react';
 
-interface WithTrackIdProps {
+export interface WithTrackIdProps {
     track_id: string,
     getId: (id: string) => void,
 }
 
-export function withTrackId<P, T extends WithTrackIdProps>(Component: React.ComponentType<T>) {
-    return class extends React.Component<T & WithTrackIdProps> {
+export function withTrackId<T extends WithTrackIdProps>(Component: React.ComponentType<Omit<T, keyof WithTrackIdProps>>) {
+    return class extends React.Component<T> {
 
-        constructor(props: T & P) {
+        constructor(props: T & WithTrackIdProps) {
             super(props);
 
             this.handleClick = this.handleClick.bind(this);
@@ -19,9 +19,11 @@ export function withTrackId<P, T extends WithTrackIdProps>(Component: React.Comp
         }
 
         render() {
+            const {track_id, getId, ...props} = this.props;
+
             return ( 
                 <div onClick={this.handleClick}>
-                    <Component {...this.props as T} />
+                    <Component {...props as T} />
                 </div>
             );
         }
