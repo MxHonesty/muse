@@ -13,7 +13,7 @@ export interface WithTrackIdProps {
 /** Hoc Function for adding TrackId and callback for
  * onClick in regards to the TrackId stored.
  * 
- *  **Return:** 
+ * **Return:** 
  *      A component that requires a track_id string and a 
  *      getId callback with a string parameter. This callback is used to
  *      operate on the stored track_id value.

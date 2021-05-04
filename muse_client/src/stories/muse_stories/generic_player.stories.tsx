@@ -22,4 +22,4 @@ export const GenericTrack = Template.bind({});
 GenericTrack.args = {
     id: '1nJE8TEWK9hf9Bl0pekJCi',
     type: 'track',
-}
+};
