@@ -11,7 +11,7 @@ from .custom_cache_handler import MemoryCacheHandler
 
 class SpotifyApi:
     """
-    Pure fabrication class that encapsulates all the spotify logic
+    Service class that encapsulates all the spotify logic
     needed for this api.
     Interacts with spotify api through the spotipy library.
     """
@@ -22,6 +22,13 @@ class SpotifyApi:
             client_secret="5c8ff7ac11924faba56b38a9f5e09dbd",
             cache_handler=MemoryCacheHandler()
         ), )
+
+    def get_track(self, track_id: str):
+        """ Returns Track instance for the given Track ID. """
+        track = self.__sp.track(track_id)
+        rez = Track(track['id'], track['name'], track['artists'][0]['name'],
+            track['album']['images'][1]['url'])
+        return rez
 
     def get_first_tracks(self, search: str, number: int) -> list:
         """

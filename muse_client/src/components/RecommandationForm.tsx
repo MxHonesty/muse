@@ -32,7 +32,7 @@ export class RecommandationForm extends Component<FormProps, FormState> {
             
             <SearchBar
             call={async (name)=>{
-              let res = await fetch(`http://127.0.0.1:8000/api/song/?track_name=${name}&nr=10`);
+              let res = await fetch(`http://127.0.0.1:8000/api/song/?track_name=${name}&nr=5`);
               let text = await res.text();
               return text;
               }}>

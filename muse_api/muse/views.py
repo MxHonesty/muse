@@ -49,6 +49,34 @@ class ListTracks(APIView):
         print("BODY", track_name, number)
         return Response(serializer.data)
 
+class TrackAPI(APIView):
+    """
+    API regarding working on a track with known id.
+    """
+    __api = SpotifyApi()
+
+    def get(self, request):
+        """ Responds with data about the given track id.
+            Http Args:
+                id: string, the id of the track.
+            Usage example: 
+                GET api/track/?id=<id>
+            Raises:
+                SpotifyCodeError if code is invalid.
+                ParseError: If bad request of invalid arguments.
+         """
+        param_dict = request.GET  # QueryDict of parameters.
+        try:
+            track_id = param_dict.get('id')
+            if track_id is None:
+                raise ParseError(detail="Arguments missing")
+        except(ValueError):
+            raise ParseError(detail="Number invalid")
+
+        data = self.__api.get_track(track_id)
+        serializer = TrackSerializer(data)
+        return Response(serializer.data)
+
 class RecommandationApiView(APIView):
     """ https://blog.logrocket.com/django-rest-framework-build-an-api-in-15-minutes/ """
     
