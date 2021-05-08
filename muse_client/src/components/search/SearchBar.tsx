@@ -1,4 +1,5 @@
 import { Component, ChangeEvent } from 'react';
+import { TextField } from '@material-ui/core';
 
 export interface SearchBarProps {
     /** Function for obtaining the data.
@@ -94,7 +95,7 @@ export class SearchBar extends Component<SearchBarProps, SearchBarState> {
     render() {
         return(
             <div>
-                <input type='text' onChange={this.onTextChange} />
+                <TextField id="outlined-basic" label="Song" variant="outlined" onChange={this.onTextChange} />
                 {this.props.children ? this.props.children(this.state.data) : null}
             </div>
         );

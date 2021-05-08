@@ -3,6 +3,7 @@ Test case modules for the Spotify Wrapper module.
 """
 from django.test import TestCase
 from ..spotify.spotify_wrapper import SpotifyApi
+from spotipy import SpotifyException
 
 
 class SpotifyWrapperTest(TestCase):
@@ -39,3 +40,17 @@ class SpotifyWrapperTest(TestCase):
         rez = self.__spotify.get_first_tracks("paradise nle choppa", 1)
         self.assertEqual(rez[0].name, "Paradise")
         self.assertEqual(rez[0].artist, "NLE Choppa")
+
+    def test_get_track(self):
+        """ A test for the get_track service functionality. """
+        rez = self.__spotify.get_track("2E2ZVy2fxslpAUgbb4zu84")
+        self.assertEqual(rez.track_id, "2E2ZVy2fxslpAUgbb4zu84")
+        self.assertEqual(rez.name, "Abracadabra")
+        self.assertEqual(rez.artist, "Steve Miller Band")
+        self.assertEqual(rez.image_url, "https://i.scdn.co/image/ab67616d00001e02b80d7868e6e0275d12102508")
+
+    def test_get_track_with_wrong_id(self):
+        """ A test case for an invalid track id. 
+        We Except the lambda code to throw a Spotify Exception
+        """
+        self.assertRaises(SpotifyException, lambda: self.__spotify.get_track("asdasd"))
