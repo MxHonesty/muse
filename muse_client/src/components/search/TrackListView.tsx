@@ -1,6 +1,5 @@
 import { TrackDisplay, TrackDisplayProps } from './TrackDisplay';
 import { withTrackId, WithTrackIdProps } from './withTrackId';
-import React from 'react';
 
 /** Interface for a Track */
 export interface Track extends Object {

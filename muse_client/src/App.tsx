@@ -8,7 +8,7 @@ import { BrowserRouter as Router,
   Route,
  } from 'react-router-dom';
 import { SearchBar } from './components/search/SearchBar';
-import { TrackListView } from './components/search/TrackListView';
+import { TrackScrollableList } from './components/search/TrackScrollableList';
 
 
 function App() {
@@ -31,7 +31,7 @@ function App() {
                 let text = await res.text();
                 return text;
                 }}>
-                 {(data: Array<any>) => { return <TrackListView data={data} onSelect={(trackId) => {console.log(trackId);}}/> }} 
+                 {(data: Array<any>) => { return <TrackScrollableList data={data} onSelect={(trackId) => {console.log(trackId);}}/> }} 
                 </SearchBar>
 
             </Route>
