@@ -9,6 +9,7 @@ import { BrowserRouter as Router,
  } from 'react-router-dom';
 import { SearchBar } from './components/search/SearchBar';
 import { TrackScrollableList } from './components/search/TrackScrollableList';
+import { RecommandationForm } from './components/RecommandationForm';
 
 
 function App() {
@@ -27,7 +28,7 @@ function App() {
 
               <SearchBar
               call={async (name)=>{
-                let res = await fetch(`http://127.0.0.1:8000/api/song/?track_name=${name}&nr=5`)
+                let res = await fetch(`http://127.0.0.1:8000/api/song/?track_name=${name}&nr=10`);
                 let text = await res.text();
                 return text;
                 }}>
@@ -35,6 +36,11 @@ function App() {
                 </SearchBar>
 
             </Route>
+            
+            <Route path='/form'>
+                <RecommandationForm/>
+            </Route>
+            
             <Route path="/">
               <img src={logo} className="App-logo" alt="logo" />
             </Route>
