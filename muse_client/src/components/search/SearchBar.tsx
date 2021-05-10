@@ -95,7 +95,7 @@ export class SearchBar extends Component<SearchBarProps, SearchBarState> {
     render() {
         return(
             <div>
-                <TextField id="outlined-basic" label="Song" variant="outlined" onChange={this.onTextChange} />
+                <TextField id="outlined-basic" label="Song" variant="outlined" onChange={this.onTextChange} required/>
                 {this.props.children ? this.props.children(this.state.data) : null}
             </div>
         );
