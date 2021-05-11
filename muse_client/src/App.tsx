@@ -11,6 +11,8 @@ import { SearchBar } from './components/search/SearchBar';
 import { TrackScrollableList } from './components/search/TrackScrollableList';
 import { RecommandationForm } from './components/RecommandationForm';
 
+import { post_recommandation, get_first_5_as_string } from './service/APIService';
+
 
 function App() {
   return (
@@ -27,18 +29,14 @@ function App() {
             <Route path="/search">
 
               <SearchBar
-              call={async (name)=>{
-                let res = await fetch(`http://127.0.0.1:8000/api/song/?track_name=${name}&nr=10`);
-                let text = await res.text();
-                return text;
-                }}>
+              call={get_first_5_as_string}>
                  {(data: Array<any>) => { return <TrackScrollableList data={data} onSelect={(trackId) => {console.log(trackId);}}/> }} 
                 </SearchBar>
 
             </Route>
             
             <Route path='/form'>
-                <RecommandationForm/>
+                <RecommandationForm call={post_recommandation}/>
             </Route>
             
             <Route path="/">

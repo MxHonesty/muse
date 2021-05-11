@@ -5,9 +5,21 @@ import { Track } from './search/TrackListView';
 import { TrackScrollableList } from './search/TrackScrollableList';
 import { TrackDisplayForList } from './search/TrackDisplayForList';
 import { SearchBar } from './search/SearchBar';
+import { get_track, get_first_5_as_string } from '../service/APIService';
+
+
+/** The type of the data passed as argument for the API call. */
+export interface FormCallType {
+    title: string,
+    description: string,
+    trackId: string,
+}
 
 interface FormProps {
-
+    /** Callback that Takes the data object as input.
+     * Used for making API Calls.
+     */
+    call: (data: FormCallType) => void,
 }
 
 interface FormState {
@@ -29,6 +41,7 @@ export class RecommandationForm extends Component<FormProps, FormState> {
         this.isSubmitDisabled = this.isSubmitDisabled.bind(this);
         this.onTitleChange = this.onTitleChange.bind(this);
         this.onDescriptionChange = this.onDescriptionChange.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
     }
 
     /** Method determines if the submit button should be disabled.
@@ -67,6 +80,16 @@ export class RecommandationForm extends Component<FormProps, FormState> {
         });
     }
 
+    /** Handles the submission of the data. */
+    onSubmit() {
+        if(this.state.track instanceof Object) {
+            this.props.call({title: this.state.title, 
+                description: this.state.description,
+                trackId: this.state.track.track_id
+            });
+        }
+    }
+
     render() {
         /** We use this function for conditional rendering.
          * The Search Bar is displayed if no track has been selected.
@@ -82,16 +105,11 @@ export class RecommandationForm extends Component<FormProps, FormState> {
             </div>: 
             
             <SearchBar
-            call={async (name)=>{
-              let res = await fetch(`http://127.0.0.1:8000/api/song/?track_name=${name}&nr=5`);
-              let text = await res.text();
-              return text;
-              }}>
+            call={get_first_5_as_string}>
                {(data: Array<any>) => { return <TrackScrollableList data={data} onSelect={ async (trackId) => {
                     // We fetch the Track data.
                     // And store the new data inside the state.
-                    let rez = await fetch(`http://127.0.0.1:8000/api/track/?id=${trackId}`);
-                    let new_track: Track = await rez.json();
+                    let new_track: Track = await get_track(trackId);
                     console.log(new_track);
                     self.setState({
                         track: new_track
@@ -108,7 +126,7 @@ export class RecommandationForm extends Component<FormProps, FormState> {
                 <SearchArea/>
                 <TextField id="title-input" label="Title" variant="outlined" style={{marginBottom: '.5em', marginTop: '.5em'}} onChange={this.onTitleChange} required/>
                 <TextField id='desc-input' label='Description' variant="outlined" multiline style={{marginBottom: '.5em'}} onChange={this.onDescriptionChange} required/>
-                <Button color='primary' disabled={is_button_disabled}>Submit</Button>
+                <Button color='primary' disabled={is_button_disabled} onClick={this.onSubmit}>Submit</Button>
             </FormControl>
         );
     }
