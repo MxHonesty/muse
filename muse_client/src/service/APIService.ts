@@ -35,3 +35,17 @@ export const get_first_5_as_string = async (name: string) => {
     let text = await res.text();
     return text;
 }
+
+export interface Recommendation {
+  title: string,
+  description: string,
+  trackId: string,
+  updated: string,
+}
+
+/** Gets a random Track from the API */
+export const get_random_recommendation = async () => {
+  let rez = await fetch(base_url + 'random/');
+  let new_rec: Recommendation = await rez.json();
+  return new_rec;
+}

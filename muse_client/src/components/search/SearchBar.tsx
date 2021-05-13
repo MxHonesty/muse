@@ -92,6 +92,13 @@ export class SearchBar extends Component<SearchBarProps, SearchBarState> {
         });
     }
 
+    /** Stoping the timeout on unmount. */
+    componentWillUnmount() {
+        if(this.state.typingTimeout) {
+            clearTimeout(this.state.typingTimeout);
+        }
+    }
+
     render() {
         return(
             <div>
