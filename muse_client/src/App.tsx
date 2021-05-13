@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 
 import { TestClass } from './components/class_boilerplate';
@@ -12,6 +11,7 @@ import { TrackScrollableList } from './components/search/TrackScrollableList';
 import { RecommandationForm } from './components/RecommandationForm';
 
 import { post_recommandation, get_first_5_as_string } from './service/APIService';
+import { MainMenu } from './components/navigation/MainMenu';
 
 
 function App() {
@@ -40,7 +40,7 @@ function App() {
             </Route>
             
             <Route path="/">
-              <img src={logo} className="App-logo" alt="logo" />
+              <MainMenu />
             </Route>
           </Switch>
         </Router>

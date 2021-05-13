@@ -2,11 +2,13 @@
 
 import { Track } from "../components/search/TrackListView";
 
+var base_url = 'http://127.0.0.1:8000/api/';
+
 /** Function used for sending a POST request to the Recommandations API with
  * Arbitrary data.
  */
 export const post_recommandation = async (data: Object) => {
-    await fetch('http://127.0.0.1:8000/api/recs/', {
+    await fetch(base_url + 'recs/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -20,7 +22,7 @@ export const post_recommandation = async (data: Object) => {
  * of an invalid id.
  */
 export const get_track = async (trackId: string) => {
-    let rez = await fetch(`http://127.0.0.1:8000/api/track/?id=${trackId}`);
+    let rez = await fetch(base_url + `track/?id=${trackId}`);
     let new_track: Track = await rez.json();
     return new_track;
 }
@@ -29,7 +31,7 @@ export const get_track = async (trackId: string) => {
  * of a json.
  */
 export const get_first_5_as_string = async (name: string) => {
-    let res = await fetch(`http://127.0.0.1:8000/api/song/?track_name=${name}&nr=5`);
+    let res = await fetch(base_url + `song/?track_name=${name}&nr=5`);
     let text = await res.text();
     return text;
 }
