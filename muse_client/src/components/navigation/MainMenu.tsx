@@ -1,7 +1,6 @@
 import { Component } from 'react';
 import { Button, ButtonGroup, ButtonProps, Paper } from '@material-ui/core';
-import { post_recommandation } from '../../service/APIService';
-import { RecommandationForm } from '../RecommandationForm';
+import { MakeARec } from './MakeARec';
 
 
 export interface MainMenuProps {}
@@ -34,6 +33,7 @@ export class MainMenu extends Component<MainMenuProps, MainMenuState> {
 
         this.onGetClick = this.onGetClick.bind(this);
         this.onMakeClick = this.onMakeClick.bind(this);
+        this.reset = this.reset.bind(this);
         this.getView = this.getView.bind(this);
     }
 
@@ -53,11 +53,19 @@ export class MainMenu extends Component<MainMenuProps, MainMenuState> {
         });
     }
 
+    /** Resets state to default value. */
+    reset() {
+        this.setState({
+            make_button: false,
+            get_button: false,
+        });
+    }
+
     getView() {
         const make = this.state.make_button;
         const get = this.state.get_button;
         if (make && !get) 
-            return(<div style={{marginTop:'1.5em'}}><RecommandationForm call={post_recommandation}/></div>);
+            return(<div style={{marginTop:'1.5em'}}><MakeARec onDone={() => {this.reset()}} /></div>);
         else if (!make && get)  // If get button Clicked
             return(<div style={{marginTop:'1.5em'}}>GET</div>);
         else 
@@ -68,8 +76,8 @@ export class MainMenu extends Component<MainMenuProps, MainMenuState> {
         return(
             <Paper elevation={3} style={{padding: '4em', display:'flex', flexDirection: "column", justifyContent: 'center'}}>
                 <ButtonGroup style={{display: 'block'}}>
-                    <ToggleButton primary={this.state.make_button} text={'Make a Recommandation'} onClick={this.onMakeClick}/>
-                    <ToggleButton primary={this.state.get_button} text={'Get a Recommandation'} onClick={this.onGetClick}/>
+                    <ToggleButton primary={this.state.make_button} text={'Make a Recommendation'} onClick={this.onMakeClick}/>
+                    <ToggleButton primary={this.state.get_button} text={'Get a Recommendation'} onClick={this.onGetClick}/>
                 </ButtonGroup>
                 {this.getView()}
             </Paper>
