@@ -1,8 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import { get_random_recommendation, get_track, Recommendation } from '../../service/APIService';
-import { TrackDisplayForList } from '../search/TrackDisplayForList';
 import { Track } from '../search/TrackListView';
 import { Button } from '@material-ui/core';
+import { TrackDisplayWithPlayer } from './TrackDisplayWithPlayer';
 
 
 /** State of the Submenu
@@ -70,7 +70,7 @@ export class GetARec extends Component<{}, GetARecState> {
         const days = Math.floor(this.getDayDifference());
         return(
             <Fragment>
-                <TrackDisplayForList name={track.name} image_url={track.image_url} artist={track.artist}/>
+                <TrackDisplayWithPlayer track_id={track.track_id} name={track.name} artist={track.artist} image_url={track.image_url}/>
                 <h5>{rec.title}</h5>
                 <p style={{fontSize: '70%'}}>{rec.description}</p>
                 <p style={{fontSize: '60%', marginTop:'3em'}}> This recommendation was made {days >= 1 ? ( days===1 ? `${days} day ago` : `${days} days ago`) : 'Today'} </p>
